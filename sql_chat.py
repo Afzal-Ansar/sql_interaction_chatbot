@@ -9,12 +9,7 @@ from sqlalchemy import create_engine
 import sqlite3
 from langchain_groq import ChatGroq
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
-## load the GROQ API Key
-os.environ["groq_API"] = os.getenv("groq_API")
-groq_api_key = os.getenv("groq_API")
+groq_API="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"
 st.set_page_config(page_title="LangChain: Chat with SQL DB",
                    page_icon=r"C:\Users\99ash\Downloads\mysql-create-database-workbench.png")
 st.image(r"C:\Users\99ash\Downloads\mysql-create-database-workbench.png")
@@ -35,7 +30,7 @@ if radio_opt.index(selected_opt) == 1:
 else:
     db_uri = LOCALDB
 ## LLM model
-llm = ChatGroq(groq_api_key=groq_api_key, model_name="Llama3-70b-8192", streaming=True)
+llm = ChatGroq(groq_api_key=groq_API, model_name="Llama3-70b-8192", streaming=True)
 @st.cache_resource(ttl="2h")
 def configure_db(db_uri, mysql_host=None, mysql_user=None, mysql_password=None, mysql_db=None):
     if db_uri == LOCALDB:
