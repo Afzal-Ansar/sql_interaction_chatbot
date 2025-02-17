@@ -6,6 +6,7 @@ from langchain.callbacks import StreamlitCallbackHandler
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from sqlalchemy import create_engine
 from langchain_groq import ChatGroq
+from urllib.parse import quote_plus
 import os
 groq_API="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"
 st.set_page_config(page_title="LangChain: Chat with SQL DB")
@@ -17,17 +18,18 @@ mysql_user = st.sidebar.text_input("MYSQL User")
 mysql_password = st.sidebar.text_input("MYSQL password", type="password")
 port=st.sidebar.number_input("enter port number")
 mysql_db = st.sidebar.text_input("MySQL database")
+encoded_password = quote_plus(mysql_password)
 ## LLM model
 llm = ChatGroq(groq_api_key=groq_API, model_name="Llama3-70b-8192", streaming=True)
 @st.cache_resource(ttl="2h")
-def configure_db( mysql_host=None, mysql_user=None, mysql_password=None, mysql_db=None,port=None):
+def configure_db( mysql_host=None, mysql_user=None, encoded_password=None, mysql_db=None,port=None):
         if not (mysql_host and mysql_user and mysql_password and mysql_db):
             st.error("Please provide all MySQL connection details.")
             st.stop()
         return SQLDatabase(
-            create_engine(f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{mysql_host}:{port}/{mysql_db}"))
+            create_engine(f"mysql+mysqlconnector://{mysql_user}:{encoded_password}@{mysql_host}:{port}/{mysql_db}"))
 
-db = configure_db(mysql_host, mysql_user, mysql_password, mysql_db)
+db = configure_db(mysql_host, mysql_user, encoded_password, mysql_db,port)
 
 # In[69]:
 
