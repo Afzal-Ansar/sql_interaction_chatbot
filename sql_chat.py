@@ -27,7 +27,7 @@ def configure_db( mysql_host=None, mysql_user=None, encoded_password=None, mysql
             st.error("Please provide all MySQL connection details.")
             st.stop()
         return SQLDatabase(
-            create_engine(f"mysql+mysqlconnector://{mysql_user}:{encoded_password}@{mysql_host}:{port}/{mysql_db}"))
+            create_engine(f"mysql+mysqlconnector://{mysql_user}:{encoded_password}@{mysql_host}:{int(port)}/{mysql_db}"))
 
 db = configure_db(mysql_host, mysql_user, encoded_password, mysql_db,port)
 
