@@ -15,8 +15,8 @@ selected_opt = st.sidebar.radio(label="Choose the DB which you want to chat", op
 mysql_host = st.sidebar.text_input("Provide MySQL Host")
 mysql_user = st.sidebar.text_input("MYSQL User")
 mysql_password = st.sidebar.text_input("MYSQL password", type="password")
-mysql_db = st.sidebar.text_input("MySQL database")
 port=st.sidebar.number_input("enter port number")
+mysql_db = st.sidebar.text_input("MySQL database")
 ## LLM model
 llm = ChatGroq(groq_api_key=groq_API, model_name="Llama3-70b-8192", streaming=True)
 @st.cache_resource(ttl="2h")
