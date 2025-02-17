@@ -10,9 +10,7 @@ import sqlite3
 from langchain_groq import ChatGroq
 import os
 groq_API="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"
-st.set_page_config(page_title="LangChain: Chat with SQL DB",
-                   page_icon=r"C:\Users\99ash\Downloads\mysql-create-database-workbench.png")
-st.image(r"C:\Users\99ash\Downloads\mysql-create-database-workbench.png")
+st.set_page_config(page_title="LangChain: Chat with SQL DB")
 st.title("🦜 LangChain: Chat with SQL DB")
 
 LOCALDB = "USE_LOCALDB"
