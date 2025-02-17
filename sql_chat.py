@@ -16,15 +16,16 @@ mysql_host = st.sidebar.text_input("Provide MySQL Host")
 mysql_user = st.sidebar.text_input("MYSQL User")
 mysql_password = st.sidebar.text_input("MYSQL password", type="password")
 mysql_db = st.sidebar.text_input("MySQL database")
+port=st.sidebar.number_input()
 ## LLM model
 llm = ChatGroq(groq_api_key=groq_API, model_name="Llama3-70b-8192", streaming=True)
 @st.cache_resource(ttl="2h")
-def configure_db( mysql_host=None, mysql_user=None, mysql_password=None, mysql_db=None):
+def configure_db( mysql_host=None, mysql_user=None, mysql_password=None, mysql_db=None,port=None):
         if not (mysql_host and mysql_user and mysql_password and mysql_db):
             st.error("Please provide all MySQL connection details.")
             st.stop()
         return SQLDatabase(
-            create_engine(f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}"))
+            create_engine(f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{mysql_host}:{port}/{mysql_db}"))
 
 db = configure_db(mysql_host, mysql_user, mysql_password, mysql_db)
 
@@ -38,7 +39,7 @@ agent = create_sql_agent(
     llm=llm,
     toolkit=toolkit,
     verbose=True,
-    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    agent_type=AgentType.OPENAI_FUNCTIONS,
     handle_parsing_errors=True
 )
 
