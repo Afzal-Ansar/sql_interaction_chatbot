@@ -57,13 +57,9 @@ for msg in st.session_state.messages:
 user_query = st.chat_input(placeholder="Ask anything from the database")
 
 if user_query:
-    st.session_state.messages.append({"role": "user", "content": user_query})
-    st.chat_message("user").write(user_query)
 
-    with st.chat_message("assistant"):
         streamlit_callback = StreamlitCallbackHandler(st.container())
         response = agent.run(user_query, callbacks=[streamlit_callback])
-        st.session_state.messages.append({"role": "assistant", "content": response})
         st.write(response)
 
 
