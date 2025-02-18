@@ -16,7 +16,7 @@ selected_opt = st.sidebar.radio(label="Choose the DB which you want to chat", op
 mysql_host = st.sidebar.text_input("Provide MySQL Host")
 mysql_user = st.sidebar.text_input("MYSQL User")
 mysql_password = st.sidebar.text_input("MYSQL password", type="password")
-port=st.sidebar.number_input("enter port number")
+port=st.sidebar.text_input("enter port number")
 mysql_db = st.sidebar.text_input("MySQL database")
 encoded_password = quote_plus(mysql_password)
 ## LLM model
