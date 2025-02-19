@@ -23,7 +23,7 @@ encoded_password = quote_plus(mysql_password)
 llm = ChatGroq(groq_api_key=groq_API, model_name="Llama3-70b-8192", streaming=True)
 @st.cache_resource(ttl="2h")
 def configure_db( mysql_host=None, mysql_user=None, encoded_password=None, mysql_db=None,port=None):
-        if not (mysql_host and mysql_user and mysql_password and mysql_db):
+        if not (mysql_host and mysql_user and encoded_password and mysql_db):
             st.error("Please provide all MySQL connection details.")
             st.stop()
         return SQLDatabase(
