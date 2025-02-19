@@ -27,7 +27,7 @@ def configure_db( mysql_host=None, mysql_user=None, mysql_password=None, mysql_d
         return SQLDatabase(
             create_engine(f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{mysql_host}:{port}/{mysql_db}"))
 
-db = configure_db(mysql_host, mysql_user, encoded_password, mysql_db,port)
+db = configure_db(mysql_host, mysql_user, mysql_password, mysql_db,port)
 
 # In[69]:
 
