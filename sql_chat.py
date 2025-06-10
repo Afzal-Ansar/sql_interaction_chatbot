@@ -7,7 +7,7 @@ from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from sqlalchemy import create_engine
 from langchain_groq import ChatGroq
 import os
-groq_API="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"
+groq_API="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"
 st.set_page_config(page_title="LangChain: Chat with SQL DB")
 st.title("🦜 LangChain: Chat with SQL DB")
 selected_opt = st.sidebar.radio(label="Choose the DB which you want to chat", options=['MYSQL DATABASE'])
